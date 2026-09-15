@@ -43,3 +43,21 @@ jobs:
 
       - name: Push Docker image
         run: docker push ghcr.io/${{ github.repository }}:${{ github.sha }}
+
+  deploy-test:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test SSH connection to EC2
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: 13.53.126.169
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "Connected to EC2 successfully"
+            docker --version
+            docker-compose version
+
+
