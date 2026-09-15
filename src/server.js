@@ -1,0 +1,1 @@
+const app=require('./app');const {initDb}=require('./db');const PORT=process.env.PORT||3000;async function start(){try{await initDb();app.listen(PORT,()=>console.log(`Task Manager API running on port ${PORT}`))}catch(e){console.error('Failed to start application:',e);process.exit(1)}}start();

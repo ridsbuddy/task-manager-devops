@@ -1,0 +1,1 @@
+const express=require('express');const taskRoutes=require('./routes/tasks');const app=express();app.use(express.json());app.get('/health',(req,res)=>res.json({status:'UP',service:'task-manager-api'}));app.use('/api/tasks',taskRoutes);app.use((req,res)=>res.status(404).json({error:'Route not found'}));module.exports=app;
